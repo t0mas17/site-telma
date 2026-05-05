@@ -1,0 +1,1434 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English with Telma | Aulas de Inglês Personalizadas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #f59e0b;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --success: #10b981;
+            --gradient: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+            background: var(--light);
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: white;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            z-index: 1000;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        /* Menu Dropdown */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            background: none;
+            border: none;
+            color: var(--dark);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: color 0.3s;
+        }
+
+        .dropdown-btn:hover {
+            color: var(--primary);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            min-width: 200px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            border-radius: 12px;
+            overflow: hidden;
+            z-index: 1010;
+            padding: 0.5rem 0;
+        }
+
+        .dropdown-content a {
+            color: var(--dark);
+            padding: 0.7rem 1.5rem;
+            display: block;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: background 0.3s, color 0.3s;
+            cursor: pointer;
+        }
+
+        .dropdown-content a:hover {
+            background-color: var(--light);
+            color: var(--primary);
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .nav-cta {
+            text-decoration: none;
+            background: var(--gradient);
+            color: white !important;
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+        }
+
+        /* WhatsApp Float */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25d366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            z-index: 999;
+            transition: transform 0.3s;
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+
+        /* LÓGICA DE ABAS */
+        .tab-content {
+            display: none;
+            padding-top: 80px;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: calc(100vh - 80px);
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            padding: 40px 5% 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            color: white;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--secondary);
+            color: var(--dark);
+        }
+
+        .btn-primary:hover {
+            background: #d97706;
+            transform: translateY(-3px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+            margin-left: 1rem;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        /* Services Quick */
+        .services-quick {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            padding: 0 5%;
+            margin-top: -60px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2rem;
+        }
+
+        .service-card h3 {
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .service-card p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Sections normais */
+        section {
+            padding: 60px 5% 100px;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .section-header p {
+            color: var(--gray);
+        }
+
+        .highlight {
+            color: var(--primary);
+        }
+
+        /* About */
+        .about {
+            background: var(--light);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: 100%;
+            height: 100%;
+            border: 4px solid var(--primary);
+            border-radius: 20px;
+            z-index: -1;
+        }
+
+        .about-content h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-content p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .method-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .method-list li {
+            padding: 0.8rem 0;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .method-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: 700;
+        }
+
+        /* Services */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .service-full {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .service-full:hover {
+            border-color: var(--primary);
+        }
+
+        .service-full .icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-full h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-full p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .service-full ul {
+            list-style: none;
+            color: var(--gray);
+        }
+
+        .service-full ul li {
+            padding: 0.3rem 0;
+        }
+
+        /* Pricing */
+        .pricing {
+            background: var(--light);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .price-card {
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            position: relative;
+            transition: transform 0.3s;
+        }
+
+        .price-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .price-card.featured {
+            background: var(--gradient);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .price-card.featured:hover {
+            transform: scale(1.08);
+        }
+
+        .price-card.featured .price {
+            color: white;
+        }
+
+        .price-card.featured .btn {
+            background: white;
+            color: var(--primary);
+        }
+
+        .badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--secondary);
+            color: var(--dark);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .price-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .price span {
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        .price-card p {
+            opacity: 0.8;
+            margin-bottom: 2rem;
+        }
+
+        .price-card ul {
+            list-style: none;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .price-card ul li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .price-card.featured ul li {
+            border-color: rgba(255,255,255,0.2);
+        }
+
+        /* Level Test */
+        .level-test {
+            background: var(--gradient);
+            color: white;
+            text-align: center;
+        }
+
+        .level-test h2 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .level-test p {
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .test-container {
+            background: white;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 3rem;
+            border-radius: 20px;
+            color: var(--dark);
+        }
+
+        .question {
+            display: none;
+            text-align: left;
+        }
+
+        .question.active {
+            display: block;
+        }
+
+        .question h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .option {
+            padding: 1rem 1.5rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .option:hover {
+            border-color: var(--primary);
+            background: var(--light);
+        }
+
+        .option.selected {
+            border-color: var(--primary);
+            background: rgba(37, 99, 235, 0.1);
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: #e2e8f0;
+            border-radius: 3px;
+            margin-bottom: 2rem;
+        }
+
+        .progress {
+            height: 100%;
+            background: var(--gradient);
+            border-radius: 3px;
+            transition: width 0.3s;
+        }
+
+        .test-result {
+            display: none;
+            text-align: center;
+        }
+
+        .test-result.active {
+            display: block;
+        }
+
+        .result-level {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 1rem 0;
+        }
+
+        /* Booking / Contactos */
+        .booking-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .booking-info h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .booking-info p {
+            color: var(--gray);
+            margin-bottom: 2rem;
+        }
+
+        .contact-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-method {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.5rem;
+            background: var(--light);
+            border-radius: 10px;
+            text-decoration: none;
+            color: var(--dark);
+            transition: all 0.3s;
+        }
+
+        .contact-method:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .contact-method span {
+            font-size: 1.5rem;
+        }
+
+        .booking-form {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 4rem;
+        }
+
+        .contact-info h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-details {
+            margin-bottom: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-item span {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .map-container {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 350px;
+            border: none;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: var(--light);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        }
+
+        .stars {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-card p {
+            color: var(--gray);
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+
+        .author-info h4 {
+            font-size: 1rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .author-info span {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        /* Footer */
+        footer {
+            background: #0f172a;
+            color: white;
+            padding: 60px 5% 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-about .logo {
+            margin-bottom: 1rem;
+        }
+
+        .footer-about p {
+            opacity: 0.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+        }
+
+        .footer-links h4 {
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="promo-banner" id="promoBanner">
+        🎉 <strong>Promoção de Maio:</strong> -20% na primeira aula! Use o código: MAIO20
+    </div>
+
+    <nav class="navbar">
+        <div class="logo" onclick="switchTab('home')">English<span>Telma</span></div>
+        <ul class="nav-links">
+            <li class="dropdown">
+                <button class="dropdown-btn">Menu ▾</button>
+                <div class="dropdown-content">
+                    <a onclick="switchTab('home')">Início</a>
+                    <a onclick="switchTab('about')">Sobre</a>
+                    <a onclick="switchTab('services')">Serviços</a>
+                    <a onclick="switchTab('pricing')">Preços</a>
+                    <a onclick="switchTab('test')">Teste de Nível</a>
+                    <a onclick="switchTab('testimonials')">Testemunhos</a>
+                    <a onclick="switchTab('contact')">Contactos</a>
+                    <a href="https://www.notion.so/3579a3c1abc2801186c3d33f740aa8f4?v=3579a3c1abc2808c8b8b000c3c0c60ff&source=copy_link" target="_blank" style="color: var(--primary); font-weight: 600;">Painel de Gestão ⚙️</a>
+                </div>
+            </li>
+            <li><a onclick="switchTab('contact')" class="nav-cta">Marcar Aula</a></li>
+        </ul>
+    </nav>
+
+    <a href="https://wa.me/351912345678?text=Olá! Gostava de saber mais sobre as aulas de inglês com a Professora Telma." class="whatsapp-float" target="_blank">
+        💬
+    </a>
+
+
+    <div id="tab-home" class="tab-content active">
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Aprende Inglês de Forma Simples e Rápida</h1>
+                <p>Aulas personalizadas para todos os níveis. Método prático focado em conversação real. Começa hoje a tua jornada para falar inglês com confiança!</p>
+                <a onclick="switchTab('contact')" class="btn btn-primary">Marcar Aula Grátis</a>
+                <a onclick="switchTab('test')" class="btn btn-outline">Fazer Teste de Nível</a>
+            </div>
+        </section>
+
+        <div class="services-quick">
+            <div class="service-card">
+                <div class="service-icon">👤</div>
+                <h3>Aulas Individuais</h3>
+                <p>100% personalizadas ao teu ritmo</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">👥</div>
+                <h3>Aulas em Grupo</h3>
+                <p>Aprende com colegas motivados</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">💻</div>
+                <h3>Online</h3>
+                <p>De qualquer lugar do mundo</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">📍</div>
+                <h3>Presencial</h3>
+                <p>Em ambiente acolhedor</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="tab-about" class="tab-content">
+        <section class="about">
+            <div class="about-grid">
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&h=600&fit=crop" alt="Professora Telma">
+                </div>
+                <div class="about-content">
+                    <h3>Olá, sou a <span class="highlight">Telma</span>!</h3>
+                    <p>Com mais de 8 anos de experiência a ensinar inglês, ajudo pessoas a comunicar com confiança em contextos pessoais e profissionais.</p>
+                    <p>Licenciada em Línguas e Literaturas Modernas pela Universidade de Lisboa, com certificação CELTA Cambridge. Já ajudei centenas de alunos a alcançar os seus objetivos linguísticos.</p>
+                   
+                    <ul class="method-list">
+                        <li><strong>Método comunicativo:</strong> Foco em conversação real desde a primeira aula</li>
+                        <li><strong>Materiais atualizados:</strong> Conteúdo relevante e interessante</li>
+                        <li><strong>Flexibilidade total:</strong> Horários adaptados à tua vida</li>
+                        <li><strong>Acompanhamento contínuo:</strong> Feedback personalizado sempre</li>
+                    </ul>
+                    <a onclick="switchTab('contact')" class="btn btn-primary">Conhece-me Melhor</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="tab-services" class="tab-content">
+        <section id="services">
+            <div class="section-header">
+                <h2>Serviços & <span class="highlight">Aulas</span></h2>
+                <p>Encontra o formato perfeito para as tuas necessidades e objetivos</p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-full">
+                    <div class="icon">🎯</div>
+                    <h3>Inglês Geral</h3>
+                    <p>Desenvolve competências completas para o dia-a-dia</p>
+                    <ul>
+                        <li>✓ Conversação fluente</li>
+                        <li>✓ Gramática aplicada</li>
+                        <li>✓ Vocabulário prático</li>
+                        <li>✓ Compreensão oral</li>
+                    </ul>
+                </div>
+                <div class="service-full">
+                    <div class="icon">💼</div>
+                    <h3>Inglês para Negócios</h3>
+                    <p>Comunica com confiança no ambiente profissional</p>
+                    <ul>
+                        <li>✓ Reuniões e apresentações</li>
+                        <li>✓ Emails profissionais</li>
+                        <li>✓ Negociação</li>
+                        <li>✓ Entrevistas de emprego</li>
+                    </ul>
+                </div>
+                <div class="service-full">
+                    <div class="icon">📝</div>
+                    <h3>Preparação para Exames</h3>
+                    <p>Alcança a certificação que precisas</p>
+                    <ul>
+                        <li>✓ Cambridge (FCE, CAE, CPE)</li>
+                        <li>✓ IELTS</li>
+                        <li>✓ TOEFL</li>
+                        <li>✓ Exames Nacionais</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 3rem;">
+                <h3 style="margin-bottom: 1rem;">Níveis Disponíveis</h3>
+                <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+                    <span style="background: white; padding: 1rem 2rem; border-radius: 50px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">🌱 Iniciante (A1-A2)</span>
+                    <span style="background: white; padding: 1rem 2rem; border-radius: 50px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">📈 Intermédio (B1-B2)</span>
+                    <span style="background: white; padding: 1rem 2rem; border-radius: 50px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">🚀 Avançado (C1-C2)</span>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="tab-pricing" class="tab-content">
+        <section class="pricing">
+            <div class="section-header">
+                <h2>Preços <span class="highlight">Transparentes</span></h2>
+                <p>Escolhe o plano que melhor se adapta a ti</p>
+            </div>
+
+            <div class="pricing-grid">
+                <div class="price-card">
+                    <h3>Aula Avulso</h3>
+                    <div class="price" id="priceAvulso">25€<span>/aula</span></div>
+                    <p>60 minutos</p>
+                    <ul>
+                        <li>✓ Individual ou grupo</li>
+                        <li>✓ Online ou presencial</li>
+                        <li>✓ Material incluído</li>
+                        <li>✓ Flexibilidade total</li>
+                    </ul>
+                    <a onclick="switchTab('contact')" class="btn btn-primary">Marcar Aula</a>
+                </div>
+
+                <div class="price-card featured">
+                    <div class="badge">Mais Popular</div>
+                    <h3>Pack 10 Aulas</h3>
+                    <div class="price" id="pricePack10">200€<span>/pack</span></div>
+                    <p>Poupa 50€</p>
+                    <ul>
+                        <li>✓ 20€ por aula</li>
+                        <li>✓ Válido 3 meses</li>
+                        <li>✓ Acompanhamento extra</li>
+                        <li>✓ Recursos exclusivos</li>
+                    </ul>
+                    <a onclick="switchTab('contact')" class="btn btn-primary">Escolher Pack</a>
+                </div>
+
+                <div class="price-card">
+                    <h3>Pack 20 Aulas</h3>
+                    <div class="price" id="pricePack20">350€<span>/pack</span></div>
+                    <p>Poupa 150€</p>
+                    <ul>
+                        <li>✓ 17.50€ por aula</li>
+                        <li>✓ Válido 6 meses</li>
+                        <li>✓ Mentoria mensal</li>
+                        <li>✓ Certificado final</li>
+                    </ul>
+                    <a onclick="switchTab('contact')" class="btn btn-primary">Escolher Pack</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="tab-test" class="tab-content">
+        <section class="level-test">
+            <h2>Descobre o Teu Nível de Inglês</h2>
+            <p>Responde a 5 perguntas rápidas e descobre o teu nível atual. É grátis e demora menos de 2 minutos!</p>
+
+            <div class="test-container">
+                <div class="progress-bar">
+                    <div class="progress" id="testProgress" style="width: 0%"></div>
+                </div>
+
+                <div class="question active" data-question="1">
+                    <h4>1. Complete: "She ___ to the gym every day."</h4>
+                    <div class="options">
+                        <div class="option" data-value="1">go</div>
+                        <div class="option" data-value="2">goes</div>
+                        <div class="option" data-value="1">going</div>
+                        <div class="option" data-value="0">goed</div>
+                    </div>
+                </div>
+
+                <div class="question" data-question="2">
+                    <h4>2. Choose the correct sentence:</h4>
+                    <div class="options">
+                        <div class="option" data-value="0">I have been to Paris last year.</div>
+                        <div class="option" data-value="2">I went to Paris last year.</div>
+                        <div class="option" data-value="1">I was go to Paris last year.</div>
+                        <div class="option" data-value="0">I did went to Paris last year.</div>
+                    </div>
+                </div>
+
+                <div class="question" data-question="3">
+                    <h4>3. "If I ___ rich, I would travel the world."</h4>
+                    <div class="options">
+                        <div class="option" data-value="1">am</div>
+                        <div class="option" data-value="0">will be</div>
+                        <div class="option" data-value="2">were</div>
+                        <div class="option" data-value="1">would be</div>
+                    </div>
+                </div>
+
+                <div class="question" data-question="4">
+                    <h4>4. What does "Nevertheless" mean?</h4>
+                    <div class="options">
+                        <div class="option" data-value="0">Because of this</div>
+                        <div class="option" data-value="1">In addition</div>
+                        <div class="option" data-value="2">In spite of that</div>
+                        <div class="option" data-value="0">As a result</div>
+                    </div>
+                </div>
+
+                <div class="question" data-question="5">
+                    <h4>5. "The report ___ by the time the meeting started."</h4>
+                    <div class="options">
+                        <div class="option" data-value="1">was finished</div>
+                        <div class="option" data-value="2">had been finished</div>
+                        <div class="option" data-value="0">has been finished</div>
+                        <div class="option" data-value="1">finished</div>
+                    </div>
+                </div>
+
+                <div class="test-result" id="testResult">
+                    <h3>🎉 O teu nível é:</h3>
+                    <div class="result-level" id="resultLevel">B1 - Intermédio</div>
+                    <p id="resultDescription">Tens uma boa base de inglês! Com algumas aulas focadas, podes facilmente passar para o nível seguinte.</p>
+                    <br>
+                    <a onclick="switchTab('contact')" class="btn btn-primary">Marcar Aula de Avaliação</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="tab-testimonials" class="tab-content">
+        <section class="testimonials">
+            <div class="section-header">
+                <h2>O Que Dizem os <span class="highlight">Alunos</span></h2>
+                <p>Histórias reais de pessoas que transformaram o seu inglês</p>
+            </div>
+
+            <div class="testimonials-grid" id="testimonialsGrid">
+                <div class="testimonial-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p>"Em 6 meses consegui finalmente ter confiança nas reuniões em inglês. A Telma adapta tudo ao meu ritmo e objetivos profissionais."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MF</div>
+                        <div class="author-info">
+                            <h4>Miguel Ferreira</h4>
+                            <span>Gestor de Projetos</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p>"Passei no exame FCE à primeira! As aulas são super dinâmicas e a Telma explica tudo de forma muito clara. Recomendo!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AS</div>
+                        <div class="author-info">
+                            <h4>Ana Santos</h4>
+                            <span>Estudante Universitária</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p>"Finalmente perdi o medo de falar! As aulas online são muito práticas e consigo encaixar na minha agenda ocupada."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">RC</div>
+                        <div class="author-info">
+                            <h4>Rita Costa</h4>
+                            <span>Médica</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="tab-contact" class="tab-content">
+        <section>
+            <div class="section-header">
+                <h2>Marca a Tua <span class="highlight">Aula</span></h2>
+                <p>A primeira aula de avaliação é gratuita e sem compromisso</p>
+            </div>
+
+            <div class="booking-container">
+                <div class="booking-info">
+                    <h3>Vamos começar?</h3>
+                    <p>Preenche o formulário ou contacta-me diretamente. Respondo em menos de 24 horas!</p>
+                   
+                    <div class="contact-methods">
+                        <a href="https://wa.me/351912345678" class="contact-method" target="_blank">
+                            <span>💬</span>
+                            <div>
+                                <strong>WhatsApp</strong><br>
+                                <small>Resposta rápida</small>
+                            </div>
+                        </a>
+                        <a href="mailto:telma@englishwithtelma.pt" class="contact-method">
+                            <span>✉️</span>
+                            <div>
+                                <strong>Email</strong><br>
+                                <small>telma@englishwithtelma.pt</small>
+                            </div>
+                        </a>
+                        <a href="tel:+351912345678" class="contact-method">
+                            <span>📞</span>
+                            <div>
+                                <strong>Telefone</strong><br>
+                                <small>+351 912 345 678</small>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <form class="booking-form" id="bookingForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Nome</label>
+                            <input type="text" placeholder="O teu nome" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" placeholder="email@exemplo.com" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Telefone</label>
+                            <input type="tel" placeholder="+351 000 000 000">
+                        </div>
+                        <div class="form-group">
+                            <label>Tipo de Aula</label>
+                            <select required>
+                                <option value="">Seleciona...</option>
+                                <option>Individual - Online</option>
+                                <option>Individual - Presencial</option>
+                                <option>Grupo - Online</option>
+                                <option>Grupo - Presencial</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Data Preferida</label>
+                            <input type="date" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Hora Preferida</label>
+                            <select required>
+                                <option value="">Seleciona...</option>
+                                <option>09:00</option>
+                                <option>10:00</option>
+                                <option>11:00</option>
+                                <option>14:00</option>
+                                <option>15:00</option>
+                                <option>16:00</option>
+                                <option>17:00</option>
+                                <option>18:00</option>
+                                <option>19:00</option>
+                                <option>20:00</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Objetivo / Mensagem</label>
+                        <textarea rows="3" placeholder="Conta-me um pouco sobre os teus objetivos..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Enviar Pedido de Marcação</button>
+                </form>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Onde Encontrar-me</h3>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <span>📍</span>
+                            <div>
+                                <strong>Localização</strong><br>
+                                Rua das Flores, 123<br>
+                                1200-000 Lisboa
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <span>🕐</span>
+                            <div>
+                                <strong>Horário</strong><br>
+                                Seg - Sex: 9h - 20h<br>
+                                Sáb: 10h - 14h
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="map-container">
+                    <iframe src="https://maps.google.com/maps?q=Lisboa&t=&z=13&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-about">
+                <div class="logo" onclick="switchTab('home')">English<span>Telma</span></div>
+                <p>Ajudo-te a comunicar em inglês com confiança, seja para trabalho, viagens ou desenvolvimento pessoal.</p>
+                <div class="social-links">
+                    <a href="#">📘</a>
+                    <a href="#">📸</a>
+                    <a href="#">🔗</a>
+                    <a href="#">🎵</a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Links Rápidos</h4>
+                <ul>
+                    <li><a onclick="switchTab('about')">Sobre Mim</a></li>
+                    <li><a onclick="switchTab('services')">Serviços</a></li>
+                    <li><a onclick="switchTab('pricing')">Preços</a></li>
+                    <li><a onclick="switchTab('contact')">Marcar Aula</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Recursos</h4>
+                <ul>
+                    <li><a onclick="switchTab('test')">Teste de Nível</a></li>
+                    <li><a href="#">Exercícios Grátis</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Política de Privacidade</a></li>
+                    <li><a href="#">Termos e Condições</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 English with Telma. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // LÓGICA DE NAVEGAÇÃO DE ABAS
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            const targetTab = document.getElementById('tab-' + tabId);
+            if(targetTab) {
+                targetTab.classList.add('active');
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Teste de Nível
+        let currentQuestion = 1;
+        let totalScore = 0;
+        const totalQuestions = 5;
+
+        document.querySelectorAll('.option').forEach(option => {
+            option.addEventListener('click', function() {
+                const question = this.closest('.question');
+                question.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+                this.classList.add('selected');
+
+                setTimeout(() => {
+                    const score = parseInt(this.dataset.value);
+                    totalScore += score;
+                    
+                    if (currentQuestion < totalQuestions) {
+                        question.classList.remove('active');
+                        currentQuestion++;
+                        document.querySelector(`[data-question="${currentQuestion}"]`).classList.add('active');
+                        document.getElementById('testProgress').style.width = ((currentQuestion - 1) / totalQuestions * 100) + '%';
+                    } else {
+                        showResult();
+                    }
+                }, 500);
+            });
+        });
+
+        function showResult() {
+            document.querySelectorAll('.question').forEach(q => q.classList.remove('active'));
+            document.getElementById('testProgress').style.width = '100%';
+            
+            const result = document.getElementById('testResult');
+            const levelEl = document.getElementById('resultLevel');
+            const descEl = document.getElementById('resultDescription');
+            
+            let level, description;
+            
+            if (totalScore <= 3) {
+                level = 'A1 - Iniciante';
+                description = 'Estás no início da tua jornada! Com aulas focadas nos fundamentos, vais progredir rapidamente.';
+            } else if (totalScore <= 5) {
+                level = 'A2 - Elementar';
+                description = 'Tens noções básicas sólidas. É hora de expandir vocabulário e começar a praticar conversação!';
+            } else if (totalScore <= 7) {
+                level = 'B1 - Intermédio';
+                description = 'Boa base! Consegues comunicar em situações do dia-a-dia. Vamos trabalhar fluência e confiança.';
+            } else if (totalScore <= 9) {
+                level = 'B2 - Intermédio Alto';
+                description = 'Excelente! Comunicas bem. Foco em nuances, expressões idiomáticas e inglês mais sofisticado.';
+            } else {
+                level = 'C1 - Avançado';
+                description = 'Impressionante! Tens um nível muito bom. Vamos polir detalhes e trabalhar fluência nativa.';
+            }
+            
+            levelEl.textContent = level;
+            descEl.textContent = description;
+            result.classList.add('active');
+        }
+
+        // Booking Form
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('✅ Pedido enviado com sucesso! Vou contactar-te em breve.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
